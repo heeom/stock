@@ -13,7 +13,6 @@ logging:
   level:
     org:
       hibernate:
-        format_sql: true
         SQL: DEBUG
         type:
           descriptor:
