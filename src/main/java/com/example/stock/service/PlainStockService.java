@@ -6,9 +6,10 @@ import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-//@Transactional
 public class PlainStockService implements StockService {
 
     private static final Logger log = LoggerFactory.getLogger(PlainStockService.class);
@@ -19,12 +20,9 @@ public class PlainStockService implements StockService {
         this.stockRepository = stockRepository;
     }
 
-    /**
-     * 재고조회 -> 재고 수량 감소 -> 갱신된 값 저장
-     * @param id 재고 id
-     * @param quantity 수량
-     */
+
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public synchronized void decrease(Long id, Long quantity) {
         Stock stock = stockRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         stock.decrease(quantity);
