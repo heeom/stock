@@ -3,12 +3,15 @@ package com.example.stock.service;
 import com.example.stock.entity.Stock;
 import com.example.stock.repository.StockRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
+//@Transactional
 public class StockService {
+
+    private static final Logger log = LoggerFactory.getLogger(StockService.class);
 
     private final StockRepository stockRepository;
 
@@ -21,8 +24,9 @@ public class StockService {
      * @param id 재고 id
      * @param quantity 수량
      */
-    public void decrease(Long id, Long quantity) {
+    public synchronized void decrease(Long id, Long quantity) {
         Stock stock = stockRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         stock.decrease(quantity);
+        stockRepository.saveAndFlush(stock);
     }
 }

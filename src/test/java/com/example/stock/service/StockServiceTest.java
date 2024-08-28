@@ -66,5 +66,10 @@ public class StockServiceTest {
         // 레이스 컨디션 발생 -> 둘 이상의 Thread가 공유 데이터에 엑세스할 수 있고 동시에 변경을 하려고 할때 발생하는 문제
         assertEquals(0, stock.getQuantity());
         // 해결 방법 : 하나의 스레드가 작업이 완료된 이후에 다른 스레드가 데이터에 접근하도록 변경
+        // decease 메서드에 synchronized(하나의 스레드만 메서드에 접근할 수 있다) 붙이는 방법
+        // @Transactional의 동작 방식 때문에 여전히 문제 발생한다.
+        // 작업 중인 스레드가 커밋되기 전에 다른 스레드가 decrease 메서드에 접근
+
+        //
     }
 }

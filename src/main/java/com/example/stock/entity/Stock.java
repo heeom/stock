@@ -30,7 +30,7 @@ public class Stock {
     }
 
     public void decrease(Long quantity) {
-        Assert.isTrue(this.quantity > quantity, "stock quantity must be greater than the quantity to be reduced");
+        Assert.isTrue(this.quantity >= quantity, "stock quantity must be greater than the quantity to be reduced");
         this.quantity -= quantity;
     }
 }
