@@ -2,22 +2,20 @@ package com.example.stock.service;
 
 import com.example.stock.entity.Stock;
 import com.example.stock.repository.StockRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PessimisticLockStockService implements StockService {
+public class OptimisticLockStockService implements StockService {
 
     private final StockRepository stockRepository;
 
-    public PessimisticLockStockService(StockRepository stockRepository) {
+    public OptimisticLockStockService(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
     @Override
     public void decrease(Long id, Long quantity) {
-        Stock stock = stockRepository.findByIdWithPessimisticLock(id);
+        Stock stock = stockRepository.findByIdWithOptimisticLock(id);
         stock.decrease(quantity);
         stockRepository.save(stock);
     }

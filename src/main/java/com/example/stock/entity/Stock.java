@@ -1,9 +1,6 @@
 package com.example.stock.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.util.Assert;
 
 @Entity
@@ -14,6 +11,9 @@ public class Stock {
     private Long id;
 
     private Long productId;
+
+    @Version
+    private Long version;
 
     private Long quantity;
 
