@@ -2,9 +2,11 @@ package com.example.stock.service;
 
 import com.example.stock.entity.Stock;
 import com.example.stock.repository.StockRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class OptimisticLockStockService implements StockService {
 
     private final StockRepository stockRepository;
