@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StockServiceTest {
 
     @Autowired
-    private StockService stockService;
+    private PessimisticLockStockService stockService;
 
     @Autowired
     private StockRepository stockRepository;
@@ -69,7 +69,5 @@ public class StockServiceTest {
         // decease 메서드에 synchronized(하나의 스레드만 메서드에 접근할 수 있다) 붙이는 방법
         // @Transactional의 동작 방식 때문에 여전히 문제 발생한다.
         // 작업 중인 스레드가 커밋되기 전에 다른 스레드가 decrease 메서드에 접근
-
-        //
     }
 }
