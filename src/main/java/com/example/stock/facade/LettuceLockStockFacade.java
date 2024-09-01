@@ -10,9 +10,9 @@ public class LettuceLockStockFacade {
     private final RedisLockRepository redisLockRepository;;
     private final StockService stockService;
 
-    public LettuceLockStockFacade(RedisLockRepository redisLockRepository, StockService stockService) {
+    public LettuceLockStockFacade(RedisLockRepository redisLockRepository, StockService plainStockService) {
         this.redisLockRepository = redisLockRepository;
-        this.stockService = stockService;
+        this.stockService = plainStockService;
     }
 
     public void decrease(Long id, Long quantity) throws InterruptedException {

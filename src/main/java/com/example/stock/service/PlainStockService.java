@@ -23,7 +23,8 @@ public class PlainStockService implements StockService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public synchronized void decrease(Long id, Long quantity) {
+    public void decrease(Long id, Long quantity) {
+        log.info("decrease stock id : {}, quantity : {}", id, quantity);
         Stock stock = stockRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         stock.decrease(quantity);
         stockRepository.saveAndFlush(stock);
